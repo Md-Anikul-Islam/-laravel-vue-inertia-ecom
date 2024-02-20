@@ -47,13 +47,12 @@ Route::post('/admin-login', [AuthController::class, 'loginCheck']);
 
 
 
-Route::middleware('auth')->group(callback: function () {
+Route::middleware(['auth', 'checkRole:1'])->group(callback: function () {
 
-    //Dashboard
+//Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    //Logout
+//Logout
     Route::get('/admin-logout', [AuthController::class, 'logout']);
-
 //Slider
     Route::get('/slider-show', [SliderController::class, 'index'])->name('slider.show');
     Route::get('/slider-create', [SliderController::class, 'create'])->name('slider.create');
