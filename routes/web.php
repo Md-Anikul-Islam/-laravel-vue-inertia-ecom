@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 //Home Page
 Route::get('/user-register', [AuthUserController::class, 'register']);
+Route::post('/user-register-store', [AuthUserController::class, 'userRegisterStore']);
 Route::get('/user-login', [AuthUserController::class, 'login']);
 
 Route::get('/', [HomePageController::class, 'index']);
@@ -43,12 +44,7 @@ Route::get('/product-details', [ProductPageController::class, 'productDetails'])
 //Admin
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/admin-login', [AuthController::class, 'loginCheck']);
-
-
-
-
 Route::middleware(['auth', 'checkRole:1'])->group(callback: function () {
-
 //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //Logout
