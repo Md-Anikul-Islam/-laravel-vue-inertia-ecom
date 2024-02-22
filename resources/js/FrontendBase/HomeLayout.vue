@@ -4,7 +4,7 @@
     </head>
     <body>
         <div>
-            <HomeNavbar :user="user" />
+            <HomeNavbar :user="user" :categories="categories" />
             <slot/>
             <HomeFooter/>
         </div>
@@ -22,6 +22,7 @@ export default {
     components: {HomeFooter, HomeNavbar},
     props:{
         user: Object,
+        categories: Object,
     }
 
 }

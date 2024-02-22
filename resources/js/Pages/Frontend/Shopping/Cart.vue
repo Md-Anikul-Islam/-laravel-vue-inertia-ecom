@@ -13,27 +13,13 @@
                     </tr>
                     </thead>
                     <tbody class="align-middle">
-                    <tr>
-                        <td class="align-middle"><img src="frontend/img/product-1.jpg" alt="" style="width: 50px;"> Product Name</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                    </tr>
+                        <tr v-for="cartProduct in cart" :key="cartProduct.id">
+                            <td class="align-middle"><img :src="cartProduct.image" alt="" style="width: 50px;"> {{cartProduct.name}}</td>
+                            <td class="align-middle">{{cartProduct.price}} Tk</td>
+                            <td class="align-middle">{{cartProduct.quantity}}</td>
+                            <td class="align-middle">{{ cartProduct.price * cartProduct.quantity }} Tk</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -76,7 +62,10 @@ import HomeLayout from "@/FrontendBase/HomeLayout.vue";
 
 export default {
     name: "Cart",
-    layout: HomeLayout
+    layout: HomeLayout,
+    props: {
+        cart: Object
+    },
 }
 </script>
 

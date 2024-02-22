@@ -32,10 +32,12 @@ Route::post('/user-login-check', [AuthUserController::class, 'loginCheckUser']);
 //Home page
 Route::get('/', [HomePageController::class, 'index'])->name('home');
 //Product
-Route::get('/product', [ProductPageController::class, 'product']);
+Route::get('/category-under-product/{id}', [ProductPageController::class, 'product']);
 Route::get('/product-details', [ProductPageController::class, 'productDetails']);
 //Cart
-Route::get('/cart', [CartController::class, 'cart']);
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+Route::get('/add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+
 
 Route::middleware(['auth', 'checkRole:2'])->group(callback: function () {
 //Auth User
