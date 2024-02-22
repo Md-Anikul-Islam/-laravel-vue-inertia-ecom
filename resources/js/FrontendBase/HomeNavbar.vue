@@ -11,12 +11,32 @@
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
+
                 <div class="d-inline-flex align-items-center">
-                    <div class="btn-group">
-                        <a class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" @click="toggleAccount">My Account</a>
-                        <div class="dropdown-menu dropdown-menu-right account-show" id="account-show">
-                            <Link class="dropdown-item" href="/user-register">Sign up</Link>
-                            <Link class="dropdown-item" href="/user-login">Sign in</Link>
+<!--                    <div class="btn-group">-->
+<!--                        <a class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" @click="toggleAccount">Account</a>-->
+<!--                        <div class="dropdown-menu dropdown-menu-right account-show" id="account-show">-->
+<!--                            <Link class="dropdown-item" href="/user-register">Sign up</Link>-->
+<!--                            <Link class="dropdown-item" href="/user-login">Sign in</Link>-->
+<!--                            <Link class="dropdown-item" href="/user-login">{{ user.name }}</Link>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div v-if="!user">
+                        <div class="btn-group">
+                            <a class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" @click="toggleAccount">Account</a>
+                            <div class="dropdown-menu dropdown-menu-right account-show" id="account-show">
+                                <Link class="dropdown-item" href="/user-register">Sign up</Link>
+                                <Link class="dropdown-item" href="/user-login">Sign in</Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div class="btn-group">
+                            <a class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" @click="toggleAccount">{{ user.name }}</a>
+                            <div class="dropdown-menu dropdown-menu-right account-show" id="account-show">
+                                <Link class="dropdown-item" href="/user-account">My Profile</Link>
+                                <Link class="dropdown-item" href="/user-logout">Sign Out</Link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -102,10 +122,10 @@
                             <Link href="/" class="nav-item nav-link active">Home</Link>
                             <Link href="/product" class="nav-item nav-link">Product</Link>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <Link href="#" class="dropdown-item">Shopping Cart</Link>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Shopping <i class="fa fa-angle-down mt-1"></i></a>
+                                <div class="dropdown-menu rounded-0 border-0 m-0">
+                                    <Link href="/cart" class="dropdown-item">Shopping Cart</Link>
+                                    <a href="#" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>
                             <Link href="#" class="nav-item nav-link">Contact</Link>
@@ -132,6 +152,9 @@
 import {Link} from "@inertiajs/vue3";
 export default {
     name: "HomeNavbar",
+    props: {
+        user: Object // Define the user prop
+    },
     methods: {
         toggleNavbar() {
             $('#navbar-vertical').collapse('toggle');

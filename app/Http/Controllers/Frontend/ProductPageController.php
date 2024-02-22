@@ -10,12 +10,14 @@ class ProductPageController extends Controller
 {
     public function product()
     {
-        return inertia('Frontend/Product/Product');
+        $user = auth()->user();
+        return inertia('Frontend/Product/Product',compact('user'));
     }
 
     public function productDetails(Request $request)
     {
+        $user = auth()->user();
         $product = Product::where('id',$request->productId)->first();
-        return inertia('Frontend/Product/ProductDetails',compact('product'));
+        return inertia('Frontend/Product/ProductDetails',compact('product','user'));
     }
 }

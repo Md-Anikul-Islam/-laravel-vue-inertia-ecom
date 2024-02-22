@@ -15,6 +15,7 @@ class HomePageController extends Controller
         $sliders = Slider::where('status',1)->latest()->get();
         $brands = Brand::withCount('products')->where('status',1)->latest()->get();
         $products = Product::where('status',1)->latest()->get();
-        return inertia('Frontend/Index',compact('sliders','brands','products'));
+        $user = auth()->user();
+        return inertia('Frontend/Index',compact('sliders','brands','products','user'));
     }
 }
